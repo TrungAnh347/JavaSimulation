@@ -22,12 +22,10 @@ public class EnhancedMergeSortVisualization extends JPanel {
         this.snapshots = snapshots;
 
         int arraySize = snapshots.get(0).length;
-        barWidth = PANEL_WIDTH / (arraySize + 2);  // Điều chỉnh kích thước các cột sao cho vừa phải
+        barWidth = PANEL_WIDTH / (arraySize + 2);  
 
-        // Tải ảnh nền
         backgroundImage = new ImageIcon(getClass().getResource("/Simulation/tet2025.jpg")).getImage();  
         
-        // Tải ảnh cây anh đào
         cherryTreeImage = new ImageIcon(getClass().getResource("/Simulation/anhcot.jpg")).getImage();  
 
         timer = new Timer(500, e -> {
@@ -44,22 +42,20 @@ public class EnhancedMergeSortVisualization extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        // Vẽ nền
+        // Ve nen 
         g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
 
         int[] array = snapshots.get(snapshotIndex >= snapshots.size() ? snapshots.size() - 1 : snapshotIndex);
         int treeHeightMultiplier = (PANEL_HEIGHT - 100) / getMaxValue(array);
 
-        // Vẽ cây anh đào cho mỗi phần tử
+        // Ve cot 
         for (int i = 0; i < array.length; i++) {
             int x = i * barWidth;
             int height = array[i] * treeHeightMultiplier;
 
-            // Vẽ cây anh đào với kích thước được điều chỉnh theo chiều cao
-            int scaledHeight = Math.min(height, cherryTreeImage.getHeight(this));  // Đảm bảo kích thước cây phù hợp
+            int scaledHeight = Math.min(height, cherryTreeImage.getHeight(this));  
             int y = PANEL_HEIGHT - scaledHeight - 50;  // Vị trí của cây anh đào
 
-            // Vẽ ảnh cây anh đào cho mỗi phần tử
             g.drawImage(cherryTreeImage, x + 5, y, barWidth - 10, scaledHeight, this);
 
             // Vẽ border và các thông tin khác
